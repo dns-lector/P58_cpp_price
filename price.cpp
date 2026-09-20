@@ -16,6 +16,12 @@ bool Price::init() {
 	product = { "Green Whiteboard Marker", 17.50f, 10, 10 };
 	product.save_to_file(file);
 
+	product = { "Lined Copybook", 7.50f, 20, 10 };
+	product.save_to_file(file);
+
+	product = { "Grided Copybook", 7.50f, 20, 5 };
+	product.save_to_file(file); 
+
 	file.close();
 	return true;
 }

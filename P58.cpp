@@ -12,10 +12,10 @@ int main()
 	while (true) {
 		int choice;
 		std::cout << "Choice an action:\n"
-			<< "1: init price\n"
-			<< "2: load price\n"
-			<< "3: show price\n"
-			<< "0: exit\n";
+			<< "1: Init price\n"
+			<< "2: Load price\n"
+			<< "3: Show price\n"
+			<< "0: Exit\n";
 
 		choice = _getch();
 		switch (choice) {
