@@ -39,6 +39,9 @@ int main()
 		case 51:  // '3'
 			price->show();
 			break;
+		case 52:  // '4'
+			price->show_by_price_ascending();
+			break;
 		case 48:  // '0'
 			return 0;
 		default:

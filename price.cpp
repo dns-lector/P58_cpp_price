@@ -86,20 +86,46 @@ void Price::show_by_price_ascending() {
 	*    [p1|n]---------->[p3|n]   - більш ефективна операція
 	         p4<-[p2|n]<------|    
 	*/
-	ListNode* node = first;
-	// окремо перевіряємо перші два
-	if (node->product.price > node->next->product.price) {
-		node->next->next = first;  // p2.next = p1
-		first = first->next;
+	// окремо обробляємо випадки, коли перелік порожній або в ньому один елемент
+	if (first == NULL) {
+		std::cout << "Price is empty" << std::endl;
+		return;
 	}
-	while (node->next->next) {
-		if (node->next->product.price > node->next->next->product.price) {
-			// порядок неправильний - міняємо порядок
-			ListNode* tmp = node->next;      // tmp = p2
-			node->next = node->next->next;   // p1.next = p3
-			node->next->next = node->next->next->next;  // p2.next = p3.next
-			node->next->next->next = tmp;  // p3.next = p2
+	if (first->next == NULL) {
+		std::cout << first->product.to_string() << std::endl;
+		return;
+	}
+	bool is_ordered;
+	do {
+		is_ordered = true;
+		ListNode* node = first;
+		// окремо перевіряємо перші два
+		if (node->product.price > node->next->product.price) {
+			// f
+			// [p1|n]->[p2|n]->[p3|n]
+			//
+			//  ---->f  
+			//       [p2|n]
+			//  <--------|
+			// [p1|n]--------->[p3|n]
+			ListNode* tmp = first->next;
+			first->next = first->next->next;  // p1.next = p3 (p2.next)
+			first->next->next = first;        // p2.next = p1
+			node = first = tmp;               // ---->f 
+			is_ordered = false;
 		}
-		node = node->next;  // переходимо до наступного
-	}
+		while (node->next->next) {
+			ListNode* tmp = node->next;      // tmp = p2
+			if (node->next->product.price > node->next->next->product.price) {
+				// порядок неправильний - міняємо порядок
+				node->next = node->next->next;   // p1.next = p3
+				tmp->next = tmp->next->next;  // p2.next = p3.next
+				tmp->next->next = tmp;  // p3.next = p2
+				is_ordered = false;
+			}
+			node = tmp;  // переходимо до наступного
+		}
+	} while (!is_ordered);
+	// відображення передаємо на інший метод
+	show();
 }
