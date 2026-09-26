@@ -15,6 +15,7 @@ int main()
 			<< "1: Init price\n"
 			<< "2: Load price\n"
 			<< "3: Show price\n"
+			<< "4: Show from cheap to expensive\n"
 			<< "0: Exit\n";
 
 		choice = _getch();

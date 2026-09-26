@@ -74,3 +74,32 @@ void Price::show() const {
 	}
 }
 
+void Price::show_by_price_ascending() {
+	// сортування - переставляння неправильно впорядкованих елементів
+	// до тих пір, поки їх не стане (всі у правильному порядку)
+	/* Перестановка у переліку :
+	* [p1|n]->[p2|n]->[p3|n]->[p4|n]   поміняти місцями p2 i p3
+	* а) поміняти значення Р в двох вузлах (через проміжну змінну)
+	*    [p1|n]->[p3|n]->[p2|n]
+	*   ! через те, що структури великі, це тягне за собою багато операцій
+	* б) поміняти покажчики на вузли
+	*    [p1|n]---------->[p3|n]   - більш ефективна операція
+	         p4<-[p2|n]<------|    
+	*/
+	ListNode* node = first;
+	// окремо перевіряємо перші два
+	if (node->product.price > node->next->product.price) {
+		node->next->next = first;  // p2.next = p1
+		first = first->next;
+	}
+	while (node->next->next) {
+		if (node->next->product.price > node->next->next->product.price) {
+			// порядок неправильний - міняємо порядок
+			ListNode* tmp = node->next;      // tmp = p2
+			node->next = node->next->next;   // p1.next = p3
+			node->next->next = node->next->next->next;  // p2.next = p3.next
+			node->next->next->next = tmp;  // p3.next = p2
+		}
+		node = node->next;  // переходимо до наступного
+	}
+}

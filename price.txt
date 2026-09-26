@@ -1,0 +1,24 @@
+Black Pencil
+14.95
+20
+0
+Blue Pen
+19.95
+25
+5
+Green Whiteboard Marker
+17.5
+10
+10
+Lined Copybook
+7.5
+20
+10
+Grided Copybook
+7.5
+20
+5
+Ruller 30cm
+3.5
+50
+0

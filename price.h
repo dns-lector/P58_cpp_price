@@ -13,4 +13,5 @@ struct Price {
 	bool init();  // інкапсуляція - перенесення функцій, пов'язаних
 	bool load();  // з прайсом до окремої "капсули" - структури Price
 	void show() const;
+	void show_by_price_ascending();  // ascending order (asc) - за зростанням
 };
