@@ -108,22 +108,24 @@ void Price::show_by_price_ascending() {
 			//       [p2|n]
 			//  <--------|
 			// [p1|n]--------->[p3|n]
-			ListNode* tmp = first->next;
-			first->next = first->next->next;  // p1.next = p3 (p2.next)
-			first->next->next = first;        // p2.next = p1
-			node = first = tmp;               // ---->f 
+			ListNode* n2 = first->next;
+			ListNode* n3 = n2->next;
+			first->next = n3;  
+			n2->next = first;                
+			node = first = n2;               
 			is_ordered = false;
 		}
 		while (node->next->next) {
-			ListNode* tmp = node->next;      // tmp = p2
 			if (node->next->product.price > node->next->next->product.price) {
-				// порядок неправильний - міняємо порядок
-				node->next = node->next->next;   // p1.next = p3
-				tmp->next = tmp->next->next;  // p2.next = p3.next
-				tmp->next->next = tmp;  // p3.next = p2
+				ListNode* n2 = node->next;
+				ListNode* n3 = n2->next;
+				ListNode* n4 = n3->next;
+				node->next = n3;
+				n3->next = n2;
+				n2->next = n4;
 				is_ordered = false;
 			}
-			node = tmp;  // переходимо до наступного
+			node = node->next;
 		}
 	} while (!is_ordered);
 	// відображення передаємо на інший метод
